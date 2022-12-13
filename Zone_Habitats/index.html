@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+<!-- the Leaflet CSS -->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
+<!-- the Leaflet JavaScript library -->
+	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+<!-- Leaflet.markercluster CSS links -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css"/>
+<!-- Leaflet.markercluster JS link -->
+<script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+
+<body>
+
+<!-- code where we create and name the container that holds the map -->
+    <div id="map" style="height: 75vh; width: 120vh;"></div>
+
+	
+
+<script>
+
+// Basemap and Frame
+var mymap = L.map('map').setView([47.286670, -121.284944], 9);
+
+var basemap = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png', {
+	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+}).addTo(mymap)
+
+// Bridge Icon
+
+var greenIcon = L.icon({
+    iconUrl: 'bridge25.png',
+  
+
+    iconSize:     [25, 25], // size of the icon
+    iconAnchor:   [12, 25], // point of the icon which will correspond to marker's location
+    popupAnchor:  [-2, -30] // point from which the popup should open relative to the iconAnchor
+});
+ 
+
+L.marker([47.322387, -121.324409],  {icon: greenIcon}).addTo(mymap).bindPopup('Bridge');
+			
+var merge_lines = L.geoJson(data, {
+		line: function(feature, latlng){
+           
+		}
+}).addTo(mymap);
+
+
+
+L.geoJSON(merge_lines.json).addTo(map);
+myLayer.addData(geojsonFeature);
+
+
+	</script>
+
+</body>
+</html>
