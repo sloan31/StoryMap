@@ -13,15 +13,28 @@
 <!-- Leaflet.markercluster CSS links -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css"/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css"/>
+
 <!-- Leaflet.markercluster JS link -->
 <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+<script src="../dist/leaflet.select-layers.min.js"></script>
+
+<!-- leaflet.legend -->
+<link rel="stylesheet" href="src/leaflet.legend.css" />
+<script src="legend/src/leaflet.legend.js"></script>
 
 <body>
 
-<!-- code where we create and name the container that holds the map -->
+<!-- map contianer -->
     <div id="map" style="height: 75vh; width: 120vh;"></div>
 
-	
+<!-- Link to Habitat Line -->
+<script type="text/javascript" src="ODHE_Stick.js"> </script>
+
+<!-- Link to Habitat Polygon -->
+<script type="text/javascript" src="ODHE_Selected_2.js"> </script>
+
+
+
 
 <script>
 
@@ -32,31 +45,120 @@ var basemap = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}
 	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(mymap)
 
+
+
 // Bridge Icon
 
 var greenIcon = L.icon({
-    iconUrl: 'bridge25.png',
+    iconUrl: 'bridge35.png',
   
 
-    iconSize:     [25, 25], // size of the icon
+    iconSize:     [35, 35], // size of the icon
     iconAnchor:   [12, 25], // point of the icon which will correspond to marker's location
     popupAnchor:  [-2, -30] // point from which the popup should open relative to the iconAnchor
 });
  
-
 L.marker([47.322387, -121.324409],  {icon: greenIcon}).addTo(mymap).bindPopup('Bridge');
-			
-var merge_lines = L.geoJson(data, {
-		line: function(feature, latlng){
-           
-		}
-}).addTo(mymap);
 
 
 
-L.geoJSON(merge_lines.json).addTo(map);
-myLayer.addData(geojsonFeature);
+// Habitat Polygon Layer
+var polygon = L.geoJson(data, {
+    onEachFeature: function(feature, latlng){}
+    }).addTo(mymap);
 
+//Habitat Line Layer
+  var line = L.geoJson(data_1, {
+        polyline: function(feature, latlng){ }
+    }).addTo(mymap);
+
+
+//Legend
+var Legend1 = L.control.Legend({    
+        position: "bottomright",
+        symbolWidth: "35",
+        title: "Legend",
+        legends: [
+                {
+                    label: "Habitat Zone",
+                    type: "rectangle",
+                    color: '#3182bd',
+                    fillColor: '#3182bd'
+                },
+                {
+                    label: "Linkage to Habitat Zones",
+                    type: "polyline",
+                    color: "#3182bd"
+                },
+                {
+                    label: "I-90 Crossing Zone",
+                    type: "polyline",
+                    color: "#dd1c77"
+                },
+                
+        ]
+    }).addTo(mymap);
+
+
+// Construction of Wildlife Crossings Area
+var phase = [
+
+    [47.394198, -121.391899],
+    [47.391649, -121.385368],
+    [47.389470, -121.381769],
+    [47.383083, -121.377689],
+    [47.372423, -121.376258],
+    [47.367670, -121.372752],
+    [47.361120, -121.372232],
+    [47.359766, -121.370910],
+    [47.356330, -121.366755],
+    [47.349139, -121.363616],
+    [47.343619, -121.364160],
+    [47.342040, -121.362963],
+    [47.340448, -121.357298],
+    [47.340004, -121.352856],
+    [47.338448, -121.350120],
+    [47.334511, -121.346407],
+    [47.331158, -121.343995],
+    [47.325457, -121.328681],
+    [47.313826, -121.315033],
+    [47.309534, -121.312222],
+    [47.302106, -121.301381],
+    [47.298563, -121.290041],
+    [47.295614, -121.286480],
+    [47.288972, -121.282793],
+    [47.286241, -121.282460],
+    [47.283469, -121.281262],
+    [47.280213, -121.280825],
+    [47.279242, -121.280362],
+    [47.278541, -121.279752],
+    [47.271427, -121.270302],
+    [47.270829, -121.268778],
+    [47.267981, -121.256106],
+    [47.267525, -121.253451],
+    [47.267754, -121.251695],
+    [47.268684, -121.247922],
+    [47.268606, -121.240992],
+    [47.269101, -121.238241],
+    [47.270127, -121.234743],
+    [47.270139, -121.233115],
+    [47.269790, -121.231396],
+    [47.265395, -121.221738],
+    [47.265395, -121.221738],
+    [47.264427, -121.218168],
+    [47.263806, -121.215832],
+    [47.263032, -121.214038],
+    [47.261689, -121.212029],
+    [47.258627, -121.209075],
+  ];            
+  
+  var polyline = L.polyline(phase).addTo(mymap);
+
+  // style of I90 crossing zone
+polyline.setStyle({
+    color: '#dd1c77',
+    weight: 4
+});
 
 	</script>
 

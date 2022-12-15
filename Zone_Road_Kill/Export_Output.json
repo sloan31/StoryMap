@@ -1,4 +1,4 @@
-var data =
+
 {"type":"FeatureCollection", "features": [
 {"type":"Feature","geometry":{"type":"Point","coordinates":[-120.98597023199994,47.200656769000034]},"properties":{"OBJECTID":10,"SalvagePer":"20-08-05-17-31-17","SalvageDat":"2020-08-05T00:00:00.000Z","PermitCrea":"2020-08-06T00:00:00.000Z","SalvageTim":"11:00","Latitude":47.20066,"Longitude":-120.98597,"SpeciesNam":"Deer","BioticNote":"Young Doe","PermitteeC":"Ellensburg","LongitudeR":-120.98597,"LatitudeRe":47.20066}},
 {"type":"Feature","geometry":{"type":"Point","coordinates":[-121.87974823099995,47.52417661100003]},"properties":{"OBJECTID":42,"SalvagePer":"20-08-17-13-34-55","SalvageDat":"2020-08-17T00:00:00.000Z","PermitCrea":"2020-08-17T00:00:00.000Z","SalvageTim":"23:00","Latitude":47.52418,"Longitude":-121.87975,"SpeciesNam":"Deer","BioticNote":"","PermitteeC":"Duvall","LongitudeR":-121.87975,"LatitudeRe":47.52418}},
